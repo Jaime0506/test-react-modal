@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react'
+import Modal from './Modal'
+
 import './App.css';
 
 function App() {
+
+  const [windowHeight, setWindowHeight] = useState({})
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const height =  window.innerHeight
+
+    setWindowHeight({
+      height,
+    })
+  }, [])
+  
+  const toggleModal = () => {
+    setIsVisible(!isVisible)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={ windowHeight }>
+      <button onClick={ toggleModal }>😈😳</button>
+
+
+    
+
+      <Modal
+        isOpen={isVisible}
+      >
+        <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore distinctio commodi adipisci, libero odit quis voluptatibus voluptatem accusantium laudantium perspiciatis mollitia quasi facilis dicta aperiam. Ducimus, id pariatur. Repellat, dolorum?</h1>
+        <code>Mama Huevo 😈</code>
+        <button onClick={ toggleModal }>Cerrar</button>
+      </Modal>
     </div>
   );
 }
